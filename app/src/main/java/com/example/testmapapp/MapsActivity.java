@@ -38,7 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GoogleMap mMap;
     private String TAG = "hey";
 
-    List<LatLng> path = new ArrayList();
+    List<LatLng> path = new ArrayList(); //array for our coords
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+        //adding markers of our route and marker
         LatLng start = new LatLng(49.42161, 26.99653);
         mMap.addMarker(new MarkerOptions().position(start).title("Marker in Khmelnitskiy"));
 
@@ -125,14 +126,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (Exception ex) {
             Log.e(TAG, ex.getLocalizedMessage());
         }
-
+        //draw polyline
         if (path.size() > 0) {
             PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(7);
             mMap.addPolyline(opts);
 //
         }
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
+        // set listener for getting coords of Marker after dragend
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
             public void onMarkerDragStart(Marker marker) {
@@ -157,6 +158,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    // What need to do:
+    //1. find way to check  markerCoord is in Array path.
+    //2. if (markerCoord is in Array){start update to LtLn of someMarker}
 }
 
 
